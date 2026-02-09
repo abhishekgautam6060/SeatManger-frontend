@@ -8,7 +8,7 @@ function signup() {
 
     fetch(`${HOST_URL}/api/auth/signup`, {
         method: "POST",
-        credentials: "same-origin", // 🔥 IMPORTANT
+        credentials: "include", // 🔥 IMPORTANT
         headers: {
             "Content-Type": "application/json"
         },
