@@ -8,7 +8,7 @@ function createLibrary() {
 
     fetch(`${HOST_URL}/api/libraries`, {
         method: "POST",
-        credentials: "same-origin", // 🔥 REQUIRED
+        credentials: "same-origin",
         headers: {
             "Content-Type": "application/json"
         },
