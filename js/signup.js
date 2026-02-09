@@ -1,10 +1,12 @@
+const HOST_URL ="https://seatmanager-backend.onrender.com";
+
 function signup() {
 
     const name = document.getElementById("name").value;
     const phone = document.getElementById("phone").value;
     const password = document.getElementById("password").value;
 
-    fetch("/api/auth/signup", {
+    fetch(`${HOST_URL}}/api/auth/signup`, {
         method: "POST",
         credentials: "same-origin", // 🔥 IMPORTANT
         headers: {

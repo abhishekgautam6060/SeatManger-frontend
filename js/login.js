@@ -1,5 +1,7 @@
+const HOST_URL ="https://seatmanager-backend.onrender.com";
+
 function login() {
-    fetch("/api/auth/login", {
+    fetch(`${HOST_URL}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -13,7 +15,7 @@ function login() {
               }
 
               // 🔍 CHECK IF LIBRARY EXISTS
-              fetch("/api/libraries/exists")
+              fetch(`${HOST_URL}/api/libraries/exists`)
                   .then(r => r.json())
                   .then(hasLibrary => {
                       if (hasLibrary) {

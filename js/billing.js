@@ -1,5 +1,7 @@
 const CURRENT_LIBRARY_ID = Number(localStorage.getItem("LIBRARY_ID"));
 
+const HOST_URL ="https://seatmanager-backend.onrender.com";
+
 const today = new Date();
 const year = today.getFullYear();
 const month = today.getMonth() + 1;
@@ -11,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function loadBillingSummary() {
     fetch(
-        `/api/billing/summary/${CURRENT_LIBRARY_ID}?year=${year}&month=${month}`
+        `${HOST_URL}/api/billing/summary/${CURRENT_LIBRARY_ID}?year=${year}&month=${month}`
       )
       .then(res => res.json())
       .then(d => {

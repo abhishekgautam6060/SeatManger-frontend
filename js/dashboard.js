@@ -12,6 +12,8 @@ let CURRENT_LIBRARY_ID =
 
 console.log("✅ dashboard.js loaded");
 
+const HOST_URL ="https://seatmanager-backend.onrender.com";
+
 
 
 
@@ -41,9 +43,9 @@ window.onload = function () {
  * LIBRARY + SEAT FLOW
  *********************************/
 function checkLibraryAndLoad() {
-  fetch("/api/libraries/exists")
+  fetch(`${HOST_URL}/api/libraries/exists`)
       .then(res => {
-        console.log("📡 /api/libraries/exists status:", res.status);
+        console.log("📡 ${HOST_URL}/api/libraries/exists status:", res.status);
         if (!res.ok) throw new Error("Library exists API failed");
         return res.json();
       })
@@ -75,7 +77,7 @@ function checkLibraryAndLoad() {
 function loadSeats(libraryId) {
   console.log("🪑 Fetching seats for library:", libraryId);
 
-  fetch(`/api/seats/library/${libraryId}`)
+  fetch(`${HOST_URL}/api/seats/library/${libraryId}`)
     .then(res => {
       console.log("📡 Seats API status:", res.status);
       return res.json();
@@ -145,7 +147,7 @@ function renderSeats(seats) {
       alert("Library not loaded. Please refresh.");
       return;
     }
-fetch(`/api/dashboards/${CURRENT_LIBRARY_ID}`)
+fetch(`${HOST_URL}/api/dashboards/${CURRENT_LIBRARY_ID}`)
   .then(res => res.json())
   .then(data => {
     console.log("📊 Dashboard stats loaded", data);
@@ -180,10 +182,10 @@ console.log(" expiry notification triggered ");
     }
 
     Promise.all([
-      fetch(`/api/student/expiring-soon/${CURRENT_LIBRARY_ID}`)
+      fetch(`${HOST_URL}/api/student/expiring-soon/${CURRENT_LIBRARY_ID}`)
         .then(r => r.json()),
 
-      fetch(`/api/student/expired/${CURRENT_LIBRARY_ID}`)
+      fetch(`${HOST_URL}/api/student/expired/${CURRENT_LIBRARY_ID}`)
         .then(r => r.json())
     ])
     .then(([expiring, expired]) => {
@@ -360,7 +362,7 @@ function updateViewAllText() {
 
    console.log("📦 Booking payload:", payload);
 
-   fetch("/api/book", {
+   fetch(`${HOST_URL}/api/book`, {
      method: "POST",
      headers: { "Content-Type": "application/json" },
      body: JSON.stringify(payload)
@@ -397,7 +399,7 @@ const CURRENT_LIBRARY_ID =
 
   currentSeatNumber = seatNumber;
 
-  fetch(`/api/student/seat/${seatNumber}/library/${CURRENT_LIBRARY_ID}`)
+  fetch(`${HOST_URL}/api/student/seat/${seatNumber}/library/${CURRENT_LIBRARY_ID}`)
       .then(res => {
         if (res.status === 404) {
           alert("This seat is vacant.");
@@ -441,7 +443,7 @@ const CURRENT_LIBRARY_ID =
      alert("Library not loaded. Please refresh.");
      return;
    }
-    fetch(`/api/vacate/libraryId/${CURRENT_LIBRARY_ID}/seatId/${currentSeatNumber}`, { method: "POST" })
+    fetch(`${HOST_URL}/api/vacate/libraryId/${CURRENT_LIBRARY_ID}/seatId/${currentSeatNumber}`, { method: "POST" })
         .then(() => {
             closeStudentModal();
             refreshUI();
@@ -470,7 +472,7 @@ const CURRENT_LIBRARY_ID =
          seatNumber: parseInt(document.getElementById("detailSeatNumber").value)
     };
 
-    fetch(`/api/student/${currentSeatNumber}/library/${CURRENT_LIBRARY_ID}`, {
+    fetch(`${HOST_URL}/api/student/${currentSeatNumber}/library/${CURRENT_LIBRARY_ID}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
@@ -502,7 +504,7 @@ const CURRENT_LIBRARY_ID =
    }
 
 
-  fetch(`/api/seats/library/${CURRENT_LIBRARY_ID}`)
+  fetch(`${HOST_URL}/api/seats/library/${CURRENT_LIBRARY_ID}`)
     .then(res => res.json())
     .then(seats => {
       const select = document.getElementById("detailSeatNumber");
