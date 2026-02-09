@@ -6,7 +6,7 @@ function signup() {
     const phone = document.getElementById("phone").value;
     const password = document.getElementById("password").value;
 
-    fetch(`${HOST_URL}}/api/auth/signup`, {
+    fetch(`${HOST_URL}/api/auth/signup`, {
         method: "POST",
         credentials: "same-origin", // 🔥 IMPORTANT
         headers: {
