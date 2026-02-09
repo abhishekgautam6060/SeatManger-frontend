@@ -1,10 +1,12 @@
+const HOST_URL ="https://seatmanager-backend.onrender.com";
+
 function createLibrary() {
 
     const libraryName = document.getElementById("libraryName").value;
     const totalSeats = document.getElementById("totalSeats").value;
     const logoUrl = document.getElementById("logoUrl").value;
 
-    fetch("/api/libraries", {
+    fetch(`${HOST_URL}/api/libraries`, {
         method: "POST",
         credentials: "same-origin", // 🔥 REQUIRED
         headers: {
